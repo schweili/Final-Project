@@ -1,0 +1,11 @@
+CREATE OR REPLACE TABLE LONDON_DATA_CT AS 
+    SELECT DATE, 
+        LEFT(DATE,4) AS date_year, 
+        SUBSTR(DATE,5,2) AS date_month,
+        SUBSTR(DATE,7,2) AS date_day,
+        CAST(DATE_FROM_PARTS(date_year,date_month,date_day) AS DATETIME) AS DATE_F,
+        MONTH(DATE_F) as MONTH,
+        max_temp, mean_temp, min_temp
+FROM WEATHER.DATA.LONDON_DATA;
+
+SELECT * FROM LONDON_DATA_CT;
